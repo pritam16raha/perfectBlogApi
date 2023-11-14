@@ -18,6 +18,7 @@ const auth = async (req, res, next) => {
         req.user = {}; //user is property but empty, and req is javascript object
         req.user._id = _id;
         req.user.role = role;
+        next();
 
     } catch(err){
         return next(CustomError.unAuthorizedToken());

@@ -4,7 +4,7 @@ import { User } from "../../model";
 const getUserData = {
     async getUser(req, res, next) {
         try{
-            const user = await User.findOne({ _id: req.user._id });
+            const user = await User.findOne({ _id: req.user._id }).select('-password');
 
             if(!user){
                 return next(CustomError.userDataNotFound());
