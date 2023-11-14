@@ -1,0 +1,24 @@
+npm install express esm nodemon -D dotenv 
+npm i
+npm i joi for validation purpose in serious project, its a library
+npm install mongoose
+
+[  ] Register an user
+
+[  ] Login an user
+
+[  ] Who am I
+
+[  ] Refresh the token
+
+[  ] Logout
+
+[  ] Add new Blog
+
+[  ] Update a product
+
+[  ] Get all Blog
+
+[  ] Get single Blog
+
+[  ] Delete a Blog
