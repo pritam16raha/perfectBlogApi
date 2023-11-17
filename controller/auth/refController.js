@@ -32,12 +32,14 @@ const refreshToken = {
             
             //console.log(RefToken);
             //console.log(REFRESH_SECRET);
-
+            let userRole;
 
             try{
-                const { _id } = await JwtService.validation(RefToken.token, REFRESH_SECRET);
+                const { _id, role } = await JwtService.validation(RefToken.token, REFRESH_SECRET);
                 userId = _id;
-
+                userRole = role;
+                console.log("role of the taken user is - "+userRole);
+                //return res.json({ userRole })
             } catch(err){
                 return next(CustomError.notValid(err.message));
             }
