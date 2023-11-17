@@ -35,7 +35,7 @@ const refreshToken = {
 
 
             try{
-                const { _id } = await JwtService.verify(RefToken.token, REFRESH_SECRET);
+                const { _id } = await JwtService.validation(RefToken.token, REFRESH_SECRET);
                 userId = _id;
 
             } catch(err){

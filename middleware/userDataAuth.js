@@ -8,9 +8,7 @@ const auth = async (req, res, next) => {
 
     if(!authHead){
         return next(CustomError.unAuthorizedUser());
-    }
-    
-    
+    }  
 
     const token = authHead.split(' ')[1];
     try{
@@ -18,14 +16,11 @@ const auth = async (req, res, next) => {
         req.user = {}; //user is property but empty, and req is javascript object
         req.user._id = _id;
         req.user.role = role;
-        next();
-
-        
+        next();    
 
     } catch(err){
         return next(CustomError.unAuthorizedToken());
     }
-
 
 }
 

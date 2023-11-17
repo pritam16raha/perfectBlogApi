@@ -16,5 +16,4 @@ router.get('/getUserData', auth, getUserData.getUser);
 router.post('/getUserDataUsingRefToken', getUserUsingRefresh.generateToken);
 
 
-
 export default router;
