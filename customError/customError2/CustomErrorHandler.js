@@ -24,6 +24,14 @@ class CustomErrorHandler extends Error{
     static unAuthorizedToken(message= 'token has been compromised!'){
         return new CustomErrorHandler(407, message);
     }
+
+    static invalidToken(message= 'refresh token != access token'){
+        return new CustomErrorHandler(408, message);
+    }
+
+    static notValid(message= 'validation holo na'){
+        return new CustomErrorHandler(409, message);
+    }
 }
 
 export default CustomErrorHandler;

@@ -4,10 +4,12 @@ import bcrypt from 'bcrypt';
 
 import JwtService from "../../services/JswtService";
 
-import { User } from "../../model";
+import { RefreshToken, User } from "../../model";
 
 //import CustomErrorHandler from "../../customError/customError2/CustomErrorHandler";
 import { CustomError } from "../../customError";
+
+import { REFRESH_SECRET } from "../../config";
 
 const login = {
     async logIn(req, res, next) {
@@ -36,8 +38,10 @@ const login = {
                 return next(CustomError.notFound("only the password is wrong"));
             }
             //login successfull
-            const accessToken = JwtService.sign({ _id: user._id, role: user.role })
-            res.json({ accessToken });
+            const accessToken = JwtService.sign({ _id: user._id, role: user.role });
+            const refreshToken = JwtService.sign({ _id: user._id, role: user.role }, '1d', REFRESH_SECRET );
+            await RefreshToken.create({ token: refreshToken });
+            res.json({ accessToken, refreshToken });
         } catch(err){
             return next(err);
         }

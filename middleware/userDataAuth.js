@@ -20,6 +20,8 @@ const auth = async (req, res, next) => {
         req.user.role = role;
         next();
 
+        
+
     } catch(err){
         return next(CustomError.unAuthorizedToken());
     }

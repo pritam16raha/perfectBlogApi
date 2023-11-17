@@ -2,11 +2,13 @@ import Joi from 'joi';
 
 import { CustomError } from '../../customError';
 
-import { User } from '../../model';
+import { RefreshToken, User } from '../../model';
 
 import bcrypt from 'bcrypt';
 
 import JwtService from '../../services/JswtService';
+
+import { REFRESH_SECRET } from '../../config';
 
 const regController = {
     async register(req, res, next){
@@ -47,16 +49,22 @@ const regController = {
 
         let accessToken;
 
+        let refreshToken;
+
         try{
             const result = await user.save();
+
             accessToken = JwtService.sign({ _id: result._id, role: result.role })
 
+            refreshToken = JwtService.sign({ _id: result._id, role: result.role }, '1d', REFRESH_SECRET );
 
+            await RefreshToken.create({ token: refreshToken });
+            
         } catch(error){
             return next(error);
         }
     
-        res.json({ accessToken: accessToken });
+        res.json({ accessToken: accessToken, refreshToken: refreshToken });
 
     }
 }
